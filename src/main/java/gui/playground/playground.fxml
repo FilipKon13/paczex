@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.playground.PlaygroundController">
+   <children>
+      <TextField fx:id="queryField" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="495.0" promptText="Query" />
+      <TextArea fx:id="resultField" editable="false" layoutX="14.0" layoutY="46.0" prefHeight="344.0" prefWidth="572.0" promptText="Result" wrapText="true" />
+      <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#makeQuery" prefHeight="26.0" prefWidth="68.0" text="Query" />
+   </children>
+</AnchorPane>
