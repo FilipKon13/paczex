@@ -2,17 +2,24 @@ package gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utility.Database;
 
 public class Main extends Application {
+    public static Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        stage = primaryStage;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+        AnchorPane root = loader.load();
+        MainController controller = loader.getController();
+        controller.commandLabel.setText("On Linux something like \n[psql --dbname=\"name\" --username=\"user\"]");
+        primaryStage.setTitle("Paczex");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
