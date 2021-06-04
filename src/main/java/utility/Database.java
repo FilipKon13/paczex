@@ -1,29 +1,27 @@
 package utility;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public final class Database {
     private static String mainCommand = "wsl psql --dbname=\"filip\" --username=\"filip\"";
+    private static Scanner scanner;
 
     public static void query(String command){
-        System.out.println(mainCommand + " --command=\"" + command + "\" > tmp.txt");
+        System.out.println(mainCommand + " --command=\"" + command + "\"");
+        Process process = null;
         try {
-            Runtime.getRuntime().exec(mainCommand + " --command=\"" + command + "\" > tmp.txt");
+            process = Runtime.getRuntime().exec(mainCommand + " --command=\"" + command + "\"");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert process != null;
+        scanner =  new Scanner(new InputStreamReader(process.getInputStream()));
     }
 
     public static Scanner getResult() {
-        try {
-            return new Scanner(new File("tmp.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return scanner;
     }
 
     public static void load(String command){

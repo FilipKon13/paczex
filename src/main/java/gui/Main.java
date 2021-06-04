@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.Database;
 
+import java.util.Scanner;
+
 public class Main extends Application {
     public static Stage stage;
 
@@ -21,6 +23,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        Database.query("select * from tab");
+//        Scanner scanner = Database.getResult(); /* test */
+//        while(scanner.hasNext()) System.out.println(scanner.nextLine());
     }
 
 
