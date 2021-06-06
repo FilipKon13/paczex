@@ -44,6 +44,7 @@ public class CustomerController implements Initializable {
     public TableColumn<Paczka, String> stanColumn;
 
     public List<Paczka> listaPaczek;
+    public Label stanLabel;
 
     private int current_ID;
 
@@ -180,7 +181,7 @@ public class CustomerController implements Initializable {
         String kod = odbierzKodField.getText();
         kod = "'" + kod + "'";
         Scanner scanner = Database.query(
-                "select odbierz_paczke_klient( " + id_klienta + ", " + id_paczki + ", " +kod + ";");
+                "select odbierz_paczke_klient( " + id_klienta + ", " + id_paczki + ", " +kod + ");");
         Database.printResult(scanner);
     }
 
@@ -201,7 +202,13 @@ public class CustomerController implements Initializable {
     }
 
     public void sprawdzStan(){
-
+        int id = Integer.parseInt(odbierzIdField.getText());
+        String stan = Database.getSingleResult("select get_opis_stanu_paczki(" + id + ")").strip();
+        if(stan.equals("gotowa do odbioru")){
+            stanLabel.setText("Paczka " + id + "jest gotowa do odbioru\n Kod: "
+                    + Database.getSingleResult("select hasz from hasze where id_paczki = " + id));
+        }
+        else    stanLabel.setText("Stan paczki " + id + ": " + stan);
     }
 
     public void obliczCene() {
