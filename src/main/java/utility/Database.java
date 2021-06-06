@@ -6,9 +6,8 @@ import java.util.Scanner;
 
 public final class Database {
     private static String mainCommand = "wsl psql --dbname=\"filip\" --username=\"filip\"";
-    private static Scanner scanner;
 
-    public static void query(String command){
+    public static Scanner query(String command){
         System.out.println(mainCommand + " --command=\"" + command + "\"");
         Process process = null;
         try {
@@ -19,11 +18,7 @@ public final class Database {
             e.printStackTrace();
         }
         assert process != null;
-        scanner =  new Scanner(new InputStreamReader(process.getInputStream()));
-    }
-
-    public static Scanner getResult() {
-        return scanner;
+        return new Scanner(new InputStreamReader(process.getInputStream()));
     }
 
     public static void load(String command){
@@ -43,7 +38,14 @@ public final class Database {
         }
     }
 
-    public static void printResult(){
+    public static void printResult(Scanner scanner){
         while(scanner.hasNext())    System.out.println(scanner.nextLine());
+    }
+
+    public static String getSingleResult(String command){
+        Scanner scanner = query(command);
+        scanner.nextLine();
+        scanner.nextLine();
+        return scanner.nextLine();
     }
 }

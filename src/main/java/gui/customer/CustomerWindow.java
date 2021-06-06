@@ -1,11 +1,8 @@
 package gui.customer;
 
 import gui.Main;
-import gui.admin.AdminController;
-import gui.admin.AdminWindow;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;

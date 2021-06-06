@@ -1,6 +1,5 @@
 package gui.playground;
 
-import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import utility.Database;
@@ -13,8 +12,7 @@ public class PlaygroundController {
 
     public void makeQuery() {
         String command = queryField.getText();
-        Database.query(command);
-        Scanner scanner = Database.getResult();
+        Scanner scanner = Database.query(command);
         resultField.setText("");
         while(scanner.hasNext())    resultField.appendText(scanner.nextLine() + '\n');
     }
