@@ -1,6 +1,12 @@
 package gui.employee;
 
+import javafx.scene.control.TextField;
+
 public class EmployeeController {
+
+    public TextField paczZWyjmij;
+    public TextField paczDoWyjmij;
+    public TextField paczDoWloz;
 
     public void loadID(){
 

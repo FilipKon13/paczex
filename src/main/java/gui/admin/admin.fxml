@@ -20,27 +20,27 @@
       <Label layoutX="401.0" layoutY="223.0" text="Klasa" />
       <Label layoutX="401.0" layoutY="254.0" text="Typ" />
       <Label layoutX="401.0" layoutY="291.0" prefHeight="18.0" prefWidth="27.0" text="Cena" />
-      <TextField layoutX="447.0" layoutY="218.0" prefHeight="26.0" prefWidth="119.0" />
-      <TextField layoutX="447.0" layoutY="249.0" prefHeight="26.0" prefWidth="119.0" />
-      <TextField layoutX="447.0" layoutY="284.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="zmienKlasa" layoutX="447.0" layoutY="218.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="zmienTyp" layoutX="447.0" layoutY="249.0" prefHeight="26.0" prefWidth="119.0" />
+      <TextField fx:id="zmienCenaWartosc" layoutX="447.0" layoutY="284.0" prefHeight="26.0" prefWidth="119.0" />
       <Button layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onAction="#zmienCene" text="Zmień cenę" />
       <Label layoutX="32.0" layoutY="34.0" text="Imię" />
       <Label layoutX="32.0" layoutY="69.0" text="Nazwisko" />
-      <TextField layoutX="88.0" layoutY="29.0" prefHeight="26.0" prefWidth="107.0" />
-      <TextField layoutX="88.0" layoutY="64.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="pracownikImie" layoutX="88.0" layoutY="29.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="pracownikNazwisko" layoutX="88.0" layoutY="64.0" prefHeight="26.0" prefWidth="107.0" />
       <Button layoutX="86.0" layoutY="103.0" mnemonicParsing="false" onAction="#dodajPracownika" text="Dodaj pracownika" />
       <Label layoutX="25.0" layoutY="187.0" text="Miasto" />
-      <TextField layoutX="77.0" layoutY="183.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="paczAddMiasto" layoutX="77.0" layoutY="183.0" prefHeight="26.0" prefWidth="107.0" />
       <Label layoutX="20.0" layoutY="223.0" text="Ulica i nr" />
-      <TextField layoutX="77.0" layoutY="218.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="paczAddUlica" layoutX="77.0" layoutY="218.0" prefHeight="26.0" prefWidth="107.0" />
       <Button layoutX="76.0" layoutY="262.0" mnemonicParsing="false" onAction="#dodajPaczkomat" text="Dodaj paczkomat" />
       <Label layoutX="25.0" layoutY="314.0" text="Paczkomat ID" />
-      <TextField layoutX="24.0" layoutY="336.0" />
+      <TextField fx:id="paczDeleteId" layoutX="24.0" layoutY="336.0" />
       <Button layoutX="89.0" layoutY="369.0" mnemonicParsing="false" onAction="#zdezaktywujPaczkomat" text="Zdezaktywuj" />
       <Label layoutX="216.0" layoutY="223.0" text="Klient ID" />
       <Label layoutX="216.0" layoutY="263.0" text="Rabat" />
-      <TextField layoutX="267.0" layoutY="218.0" prefHeight="26.0" prefWidth="107.0" />
-      <TextField layoutX="267.0" layoutY="261.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="rabatKlientId" layoutX="267.0" layoutY="218.0" prefHeight="26.0" prefWidth="107.0" />
+      <TextField fx:id="rabatWartosc" layoutX="267.0" layoutY="261.0" prefHeight="26.0" prefWidth="107.0" />
       <Button layoutX="290.0" layoutY="301.0" mnemonicParsing="false" onAction="#dodajRabat" text="Dodaj rabat" />
 </children>
 </AnchorPane>

@@ -26,10 +26,10 @@
       <Button layoutX="313.0" layoutY="382.0" mnemonicParsing="false" onAction="#wyjmijPaczki" text="Wyjmij" />
       <Label layoutX="215.0" layoutY="223.0" text="Z paczkomatu" />
       <Label layoutX="215.0" layoutY="292.0" text="Do paczkomatu" />
-      <TextField layoutX="215.0" layoutY="250.0" />
-      <TextField layoutX="215.0" layoutY="323.0" />
+      <TextField fx:id="paczZWyjmij" layoutX="215.0" layoutY="250.0" />
+      <TextField fx:id="paczDoWyjmij" layoutX="215.0" layoutY="323.0" />
       <Label layoutX="408.0" layoutY="223.0" text="Do paczkomatu" />
-      <TextField layoutX="402.0" layoutY="250.0" />
+      <TextField fx:id="paczDoWloz" layoutX="402.0" layoutY="250.0" />
       <Button layoutX="491.0" layoutY="297.0" mnemonicParsing="false" onAction="#wlozPaczki" text="Włóż" />
 </children>
 </AnchorPane>
