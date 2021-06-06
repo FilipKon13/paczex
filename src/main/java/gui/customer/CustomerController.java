@@ -3,6 +3,7 @@ package gui.customer;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utility.Database;
 
 public class CustomerController {
     public TextField idField;
@@ -25,7 +26,8 @@ public class CustomerController {
     public Label cenaLabel;
 
     public void loadID() {
-
+        int ID = Integer.parseInt(idField.getText());
+        Database.query("select * from klienci where id_klienta = " + ID);
     }
 
     public void refreshTableView() {

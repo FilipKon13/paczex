@@ -26,5 +26,18 @@ public final class Database {
 
     public static void load(String command){
         mainCommand = command;
+        try { //clearing
+            System.out.println(mainCommand + " < src/main/java/database/clear.sql");
+            Process process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/clear.sql");
+            Scanner cin = new Scanner(new InputStreamReader(process.getErrorStream()));
+            while(cin.hasNext())    System.out.println(cin.nextLine());
+            //creating
+            System.out.println(mainCommand + " < ");
+            process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/create.sql");
+            cin = new Scanner(new InputStreamReader(process.getInputStream()));
+            while(cin.hasNext())    System.out.println(cin.nextLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
