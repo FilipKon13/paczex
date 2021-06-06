@@ -27,12 +27,12 @@ public final class Database {
             //wsl psql --dbname="rafi" --username="rafi"
             //added paczex/ to path you might want to change that
             System.out.println(mainCommand + " < src/main/java/database/clear.sql");
-            Process process = Runtime.getRuntime().exec(mainCommand + " < paczex/src/main/java/database/clear.sql");
+            Process process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/clear.sql");
             Scanner cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
             //creating
             System.out.println(mainCommand + " < src/main/java/database/create.sql");
-            process = Runtime.getRuntime().exec(mainCommand + " < paczex/src/main/java/database/create.sql");
+            process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/create.sql");
             cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
         } catch (IOException e) {

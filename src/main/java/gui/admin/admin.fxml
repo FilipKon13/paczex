@@ -6,12 +6,7 @@
 
 <AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.admin.AdminController">
 <children>
-    <TableView layoutX="244.0" layoutY="10.0" prefHeight="186.0" prefWidth="342.0">
-        <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-    </TableView>
+    <TableView fx:id="tableView" layoutX="244.0" layoutY="10.0" prefHeight="186.0" prefWidth="342.0"/>
     <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="198.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
     <Label layoutX="204.0" layoutY="288.0" prefHeight="18.0" prefWidth="171.0" />
     <Label layoutX="14.0" layoutY="327.0" prefHeight="18.0" prefWidth="171.0" AnchorPane.bottomAnchor="57.0" />

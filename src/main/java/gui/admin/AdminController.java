@@ -1,12 +1,19 @@
 package gui.admin;
 
+import javafx.beans.value.ObservableValueBase;
+import javafx.collections.FXCollections;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import utility.Database;
+import utility.Pracownik;
 
-import java.util.Scanner;
+import java.net.URL;
+import java.util.*;
 
-public class AdminController {
+public class AdminController implements Initializable {
 
     public TextField zmienKlasa;
     public TextField zmienTyp;
@@ -20,6 +27,49 @@ public class AdminController {
     public TextField rabatWartosc;
     public Label pracownikLabel;
     public Label paczkomatLabel;
+    public TableView<Pracownik> tableView;
+    public TableColumn<Pracownik, String> idColumn;
+    public TableColumn<Pracownik, String> imieColumn;
+    public TableColumn<Pracownik, String> nazwiskoColumn;
+
+    public List<Pracownik> listaPlac;
+
+    {
+        idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
+            @Override
+            public String getValue() {
+                return String.valueOf(p.getValue().id);
+            }
+        });
+        idColumn.setPrefWidth(10);
+        idColumn.sortableProperty().setValue(false);
+    }
+
+    {
+        imieColumn = new TableColumn<>("Imię");
+        imieColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
+            @Override
+            public String getValue() {
+                return p.getValue().imie;
+            }
+        });
+        imieColumn.setPrefWidth(50);
+        imieColumn.sortableProperty().setValue(false);
+    }
+
+    {
+        nazwiskoColumn = new TableColumn<>("Nazwisko");
+        nazwiskoColumn.setCellValueFactory(p -> new ObservableValueBase<>() {
+            @Override
+            public String getValue() {
+                return p.getValue().nazwisko;
+            }
+        });
+        nazwiskoColumn.setPrefWidth(50);
+        nazwiskoColumn.sortableProperty().setValue(false);
+    }
+
 
     public void dodajPracownika(){
         String imie = pracownikImie.getText();
@@ -29,6 +79,25 @@ public class AdminController {
         nazwisko = "'" + nazwisko + "'";
         String id = Database.getSingleResult("select create_pracownik( " + imie + ", " + nazwisko + ");");
         pracownikLabel.setText("ID pracownika to: " + id);
+        refreshTableView();
+    }
+
+    private void refreshTableView() {
+        listaPlac = new ArrayList<>();
+        int N = Integer.parseInt(Database.getSingleResult("select count(*) from pracownicy").strip());
+        Scanner scanner = Database.query("select * from pracownicy");
+        scanner.nextLine();
+        scanner.nextLine();
+        for(int i=0;i<N;i++){
+            int id = scanner.nextInt();
+            scanner.next();
+            String name = scanner.next();
+            scanner.next();
+            String surname = scanner.next();
+            listaPlac.add(new Pracownik(id,name,surname));
+        }
+        tableView.setItems(null);
+        tableView.setItems(FXCollections.observableList(listaPlac));
     }
 
     public void dodajPaczkomat(){
@@ -66,5 +135,10 @@ public class AdminController {
         typ = "'" + typ + "'";
         cena = "'" + cena + "'";
         Database.query("select zmien_cena( " + typ + ", " + klasa + ", " + cena + ");");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        refreshTableView();
     }
 }

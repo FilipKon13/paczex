@@ -18,10 +18,10 @@ CREATE  TABLE klienci (
 
 ALTER TABLE klienci ADD CONSTRAINT email_or_numer_notnull CHECK ( email is not null or numer_telefonu is not null );
 
-create sequence paczkomaty_seq start 100 increment by 1;
+create sequence paczkomaty_seq start 1 increment by 1;
 
 CREATE  TABLE paczkomaty (
-	id_paczkomatu        integer  NOT NULL ,
+	id_paczkomatu        integer DEFAULT nextval('paczkomaty_seq') NOT NULL ,
 	miasto               varchar(20)  NOT NULL ,
 	ulica_nr             varchar(20)  NOT NULL ,
 	aktywny				 boolean DEFAULT true NOT NULL,
@@ -30,10 +30,10 @@ CREATE  TABLE paczkomaty (
 
 CREATE INDEX idx_paczkomaty_miasto ON paczkomaty USING hash( miasto );
 
-create sequence pracownicy_seq start 100 increment by 1;
+create sequence pracownicy_seq start 1 increment by 1;
 
 CREATE  TABLE pracownicy (
-	id_pracownika        integer  NOT NULL ,
+	id_pracownika        integer DEFAULT nextval('pracownicy_seq') NOT NULL ,
 	imie                 varchar(20)  NOT NULL ,
 	nazwisko             varchar(20)  NOT NULL ,
 	CONSTRAINT pk_pracownicy_id_pracownika PRIMARY KEY ( id_pracownika )
@@ -428,14 +428,14 @@ insert into typy values (1,10,20,20), (2,20,30,30);
 
 insert into cena_klasa_typ values (1,1,8), (2,1,10), (1,2,12), (2,2,15);
 
-insert into pracownicy values (1,'Jan','Kowalski'), (2,'Adam','Nowak'), (3, 'Tomasz', 'Krakowski');
+insert into pracownicy values (default,'Jan','Kowalski'), (default,'Adam','Nowak'), (default, 'Tomasz', 'Krakowski');
 
 insert into klienci values (default,'Amazon','600500400','amazon@amazon.pl'), (default,'Jan Wojcik', '615789432', 'janwojcik@gmail.com'), (default, 'Joanna Nowicka', '557980043', null),
 (default, 'Zabawki dla dzieci', '543786100', 'zabawki@gmail.com'), (default, 'Anna Jarosz', null, 'jaroszanna@wp.pl');
 
 insert into stany values (1, 'oczekuje nadania'), (2, 'nadana'), (3, 'w doreczeniu'), (4, 'gotowa do odbioru'), (5, 'odebrana'), (6, 'w punkcie zbiorczym');
 
-insert into paczkomaty values (1,'Krakow', 'Lojasiewicza 6'), (2,'Krakow', 'Lubicz 43'), (3,'Tarnow','Krakowska 149');
+insert into paczkomaty values (default,'Krakow', 'Lojasiewicza 6'), (default,'Krakow', 'Lubicz 43'), (default,'Tarnow','Krakowska 149');
 
 insert into pojemnosc_paczkomatu values (1,1,20), (1,2,15), (2,1,30), (2,2,20), (3,1,30), (3,2,20);
 
