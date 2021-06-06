@@ -83,6 +83,10 @@ public class CustomerController {
 
     }
 
+    public void sprawdzStan(){
+
+    }
+
     public void obliczCene() {
         int typ = Integer.parseInt(nadajTyp.getText());
         int klasa = Integer.parseInt(nadajKlasa.getText());
