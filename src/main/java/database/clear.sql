@@ -32,7 +32,12 @@ drop function if exists create_przewoz;
 drop function if exists odbierz_paczke_klient;
 drop function if exists wloz_paczke_klient;
 drop function if exists create_klient;
+drop function if exists dodaj_rabat;
+drop function if exists create_pracownik;
+drop function if exists create_paczkomat;
 
 drop sequence if exists paczki_seq;
 drop sequence if exists przewozy_seq;
 drop sequence if exists klienci_seq;
+drop sequence if exists pracownicy_seq;
+drop sequence if exists paczkomaty_seq;
