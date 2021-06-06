@@ -42,7 +42,7 @@ public class AdminController implements Initializable {
                 return String.valueOf(p.getValue().id);
             }
         });
-        idColumn.setPrefWidth(10);
+        idColumn.setPrefWidth(30);
         idColumn.sortableProperty().setValue(false);
     }
 
@@ -54,7 +54,7 @@ public class AdminController implements Initializable {
                 return p.getValue().imie;
             }
         });
-        imieColumn.setPrefWidth(50);
+        imieColumn.setPrefWidth(100);
         imieColumn.sortableProperty().setValue(false);
     }
 
@@ -66,7 +66,7 @@ public class AdminController implements Initializable {
                 return p.getValue().nazwisko;
             }
         });
-        nazwiskoColumn.setPrefWidth(50);
+        nazwiskoColumn.setPrefWidth(100);
         nazwiskoColumn.sortableProperty().setValue(false);
     }
 
@@ -140,5 +140,7 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshTableView();
+        //noinspection unchecked
+        tableView.getColumns().addAll(idColumn,imieColumn,nazwiskoColumn);
     }
 }
