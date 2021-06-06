@@ -200,6 +200,10 @@ public class CustomerController implements Initializable {
         System.out.println(res);
     }
 
+    public void sprawdzStan(){
+
+    }
+
     public void obliczCene() {
         int typ = Integer.parseInt(nadajTyp.getText());
         int klasa = Integer.parseInt(nadajKlasa.getText());

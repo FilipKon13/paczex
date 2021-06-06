@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.customer.CustomerController">
+<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.customer.CustomerController">
    <children>
       <TextField fx:id="idField" layoutX="14.0" layoutY="39.0" />
       <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#loadID" prefHeight="26.0" prefWidth="56.0" text="Load" />
@@ -51,5 +51,6 @@
       <Button layoutX="498.0" layoutY="359.0" mnemonicParsing="false" onAction="#ustalTyp" prefHeight="26.0" prefWidth="87.0" text="Ustal typ" />
       <Label layoutX="397.0" layoutY="364.0" text="Cena" />
       <Label fx:id="cenaLabel" alignment="CENTER_RIGHT" layoutX="428.0" layoutY="364.0" prefHeight="18.0" prefWidth="56.0" />
+      <Button layoutX="290.0" layoutY="360.0" mnemonicParsing="false" onAction="#sprawdzStan" text="Sprawdź stan" />
    </children>
 </AnchorPane>

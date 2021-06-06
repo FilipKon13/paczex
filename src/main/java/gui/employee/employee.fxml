@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.employee.EmployeeController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employee.EmployeeController">
+<children>
+    <TextField fx:id="idField" layoutX="14.0" layoutY="39.0" />
+    <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#loadID" prefHeight="26.0" prefWidth="56.0" text="Load" />
+    <Label layoutX="14.0" layoutY="14.0" text="ID" />
+    <TableView layoutX="244.0" layoutY="10.0" prefHeight="186.0" prefWidth="342.0">
+        <columns>
+            <TableColumn prefWidth="75.0" text="C1" />
+            <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+    </TableView>
+    <Button layoutX="177.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshTableView" text="Refresh" />
+    <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="198.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
+    <Label layoutX="204.0" layoutY="288.0" prefHeight="18.0" prefWidth="171.0" />
+    <Label layoutX="14.0" layoutY="327.0" prefHeight="18.0" prefWidth="171.0" AnchorPane.bottomAnchor="57.0" />
+    <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="385.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
+    <Label alignment="CENTER_RIGHT" layoutX="428.0" layoutY="364.0" prefHeight="18.0" prefWidth="56.0" />
+      <Button layoutX="50.0" layoutY="219.0" mnemonicParsing="false" onAction="#zacznijPrzewoz" text="Zacznij przewóz" />
+      <Button layoutX="46.0" layoutY="275.0" mnemonicParsing="false" onAction="#zakonczPrzewoz" text="Zakończ przewóz" />
+      <Button layoutX="313.0" layoutY="382.0" mnemonicParsing="false" onAction="#wyjmijPaczki" text="Wyjmij" />
+      <Label layoutX="215.0" layoutY="223.0" text="Z paczkomatu" />
+      <Label layoutX="215.0" layoutY="292.0" text="Do paczkomatu" />
+      <TextField fx:id="paczZWyjmij" layoutX="215.0" layoutY="250.0" />
+      <TextField fx:id="paczDoWyjmij" layoutX="215.0" layoutY="323.0" />
+      <Label layoutX="408.0" layoutY="223.0" text="Do paczkomatu" />
+      <TextField fx:id="paczDoWloz" layoutX="402.0" layoutY="250.0" />
+      <Button layoutX="491.0" layoutY="297.0" mnemonicParsing="false" onAction="#wlozPaczki" text="Włóż" />
+</children>
 </AnchorPane>

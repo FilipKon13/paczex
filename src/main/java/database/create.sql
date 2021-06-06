@@ -18,6 +18,8 @@ CREATE  TABLE klienci (
 
 ALTER TABLE klienci ADD CONSTRAINT email_or_numer_notnull CHECK ( email is not null or numer_telefonu is not null );
 
+create sequence paczkomaty_seq start 100 increment by 1;
+
 CREATE  TABLE paczkomaty (
 	id_paczkomatu        integer  NOT NULL ,
 	miasto               varchar(20)  NOT NULL ,
@@ -27,6 +29,8 @@ CREATE  TABLE paczkomaty (
  );
 
 CREATE INDEX idx_paczkomaty_miasto ON paczkomaty USING hash( miasto );
+
+create sequence pracownicy_seq start 100 increment by 1;
 
 CREATE  TABLE pracownicy (
 	id_pracownika        integer  NOT NULL ,
@@ -386,6 +390,37 @@ begin
 	return id;
 end;
 $$ language plpgsql;
+
+--ok
+create or replace function dodaj_rabat(klient int, rabat_nowy numeric(5,2)) returns void as
+$$
+begin
+    if klient in (select id_klienta from rabaty_stale_klienci) then
+        update rabaty_stale_klienci set rabat=rabat_nowy where id_klienta=klient;
+    else
+        insert into rabaty_stale_klienci values(klient,rabat_nowy);
+    end if;
+end;
+$$ language plpgsql;
+
+--ok
+create or replace function create_pracownik(imie varchar(20), nazwisko varchar(20)) returns int as $$
+declare id int := nextval('pracownicy_seq');
+begin
+	insert into pracownicy values (id, imie, nazwisko);
+	return id;
+end;
+$$ language plpgsql;
+
+--ok
+create or replace function create_paczkomat(miasto varchar(20), ulica_nr varchar(20)) returns int as $$
+declare id int := nextval('paczkomaty_seq');
+begin
+	insert into paczkomaty values (id, miasto, ulica_nr, default);
+	return id;
+end;
+$$ language plpgsql;
+
 
 insert into klasy values (1,'zwykla'), (2,'premium');
 
