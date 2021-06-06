@@ -13,6 +13,8 @@ public final class Database {
         Process process = null;
         try {
             process = Runtime.getRuntime().exec(mainCommand + " --command=\"" + command + "\"");
+            Scanner error = new Scanner(new InputStreamReader(process.getErrorStream()));
+            while(error.hasNext())  System.out.println(error.nextLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,12 +34,16 @@ public final class Database {
             Scanner cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
             //creating
-            System.out.println(mainCommand + " < ");
+            System.out.println(mainCommand + " < src/main/java/database/create.sql");
             process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/create.sql");
             cin = new Scanner(new InputStreamReader(process.getInputStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void printResult(){
+        while(scanner.hasNext())    System.out.println(scanner.nextLine());
     }
 }

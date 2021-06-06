@@ -395,8 +395,8 @@ insert into cena_klasa_typ values (1,1,8), (2,1,10), (1,2,12), (2,2,15);
 
 insert into pracownicy values (1,'Jan','Kowalski'), (2,'Adam','Nowak'), (3, 'Tomasz', 'Krakowski');
 
-insert into klienci values (1,'Amazon','600500400','amazon@amazon.pl'), (2,'Jan Wojcik', '615789432', 'janwojcik@gmail.com'), (3, 'Joanna Nowicka', '557980043', null),
-(4, 'Zabawki dla dzieci', '543786100', 'zabawki@gmail.com'), (5, 'Anna Jarosz', null, 'jaroszanna@wp.pl');
+insert into klienci values (default,'Amazon','600500400','amazon@amazon.pl'), (default,'Jan Wojcik', '615789432', 'janwojcik@gmail.com'), (default, 'Joanna Nowicka', '557980043', null),
+(default, 'Zabawki dla dzieci', '543786100', 'zabawki@gmail.com'), (default, 'Anna Jarosz', null, 'jaroszanna@wp.pl');
 
 insert into stany values (1, 'oczekuje nadania'), (2, 'nadana'), (3, 'w doreczeniu'), (4, 'gotowa do odbioru'), (5, 'odebrana'), (6, 'w punkcie zbiorczym');
 

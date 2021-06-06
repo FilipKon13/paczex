@@ -22,7 +22,6 @@ public class AdminWindow {
         controller = loader.getController();
         stage.setResizable(false);
         stage.initOwner(Main.stage);
-        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Admin");
     }
 
