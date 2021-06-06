@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.customer.CustomerController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="438.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.customer.CustomerController">
+   <children>
+      <TextField fx:id="idField" layoutX="14.0" layoutY="39.0" />
+      <Button layoutX="177.0" layoutY="39.0" mnemonicParsing="false" onAction="#loadID" prefHeight="26.0" prefWidth="56.0" text="Load" />
+      <Label layoutX="14.0" layoutY="14.0" text="ID" />
+      <Label layoutX="14.0" layoutY="72.0" text="Nazwa" />
+      <Label layoutX="14.0" layoutY="101.0" text="Numer" />
+      <Label layoutX="14.0" layoutY="135.0" text="Email" />
+      <Label fx:id="nazwaLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="72.0" prefWidth="100.0" text="Label" />
+      <Label fx:id="numerLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="101.0" prefWidth="100.0" text="Label" />
+      <Label fx:id="emailLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="135.0" prefWidth="100.0" text="Label" />
+      <TableView layoutX="244.0" layoutY="10.0" prefHeight="186.0" prefWidth="342.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button layoutX="177.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshTableView" text="Refresh" />
+      <Button layoutX="114.0" layoutY="397.0" mnemonicParsing="false" onAction="#createKlient" text="Nowy klient" />
+      <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="198.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
+      <Button layoutX="276.0" layoutY="397.0" mnemonicParsing="false" onAction="#odbierzPaczke" text="Odbierz paczkę" />
+      <Button layoutX="498.0" layoutY="397.0" mnemonicParsing="false" onAction="#nadajPaczke" text="Nadaj paczkę" />
+      <TextField fx:id="newKlientNazwaField" layoutX="59.0" layoutY="213.0" prefHeight="26.0" prefWidth="134.0" />
+      <TextField fx:id="newKlientNumerField" layoutX="59.0" layoutY="252.0" prefHeight="26.0" prefWidth="134.0" />
+      <TextField fx:id="newKlientEmailField" layoutX="59.0" layoutY="291.0" prefHeight="26.0" prefWidth="134.0" />
+      <Label layoutX="14.0" layoutY="217.0" text="Nazwa" />
+      <Label layoutX="14.0" layoutY="256.0" text="Numer" />
+      <Label layoutX="14.0" layoutY="295.0" text="Email" />
+      <Label layoutX="205.0" layoutY="217.0" text="ID paczki" />
+      <Label layoutX="205.0" layoutY="256.0" text="Kod" />
+      <TextField fx:id="odbierzIdField" layoutX="263.0" layoutY="212.0" prefHeight="26.0" prefWidth="112.0" />
+      <TextField fx:id="odbierzKodField" layoutX="263.0" layoutY="252.0" prefHeight="26.0" prefWidth="112.0" />
+      <Button layoutX="397.0" layoutY="397.0" mnemonicParsing="false" onAction="#obliczCene" prefHeight="26.0" prefWidth="87.0" text="Oblicz cenę" />
+      <TextField fx:id="nadajPaczNadania" layoutX="397.0" layoutY="213.0" prefHeight="26.0" prefWidth="87.0" promptText="ID nadania" />
+      <TextField fx:id="nadajPaczOdbioru" layoutX="498.0" layoutY="213.0" prefHeight="26.0" prefWidth="87.0" promptText="ID odbioru" />
+      <TextField fx:id="nadajKlasa" layoutX="397.0" layoutY="251.0" prefHeight="26.0" prefWidth="87.0" promptText="Klasa" />
+      <TextField fx:id="nadajTyp" layoutX="498.0" layoutY="252.0" prefHeight="26.0" prefWidth="87.0" promptText="Typ" />
+      <TextField fx:id="nadajOdbiorca" layoutX="397.0" layoutY="290.0" prefHeight="26.0" prefWidth="87.0" promptText="ID odbiorcy" />
+      <Label fx:id="odbiorLabelMessage" layoutX="204.0" layoutY="288.0" prefHeight="18.0" prefWidth="171.0" />
+      <Label fx:id="newLabelMessage" layoutX="14.0" layoutY="327.0" prefHeight="18.0" prefWidth="171.0" AnchorPane.bottomAnchor="57.0" />
+      <TextField fx:id="nadajOpis" layoutX="397.0" layoutY="323.0" prefHeight="26.0" prefWidth="188.0" promptText="Opis" />
+      <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="385.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
+      <Button layoutX="498.0" layoutY="359.0" mnemonicParsing="false" onAction="#ustalTyp" prefHeight="26.0" prefWidth="87.0" text="Ustal typ" />
+      <Label layoutX="397.0" layoutY="364.0" text="Cena" />
+      <Label fx:id="cenaLabel" alignment="CENTER_RIGHT" layoutX="428.0" layoutY="364.0" prefHeight="18.0" prefWidth="56.0" />
+   </children>
 </AnchorPane>

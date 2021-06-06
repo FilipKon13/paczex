@@ -4,7 +4,6 @@ import gui.admin.AdminWindow;
 import gui.customer.CustomerWindow;
 import gui.employee.EmployeeWindow;
 import gui.playground.PlaygroundWindow;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import utility.Database;
@@ -26,6 +25,7 @@ public class MainController {
     }
 
     public void loadCommand() {
+        System.out.println(commandField.getText());
         Database.load(commandField.getText());
     }
 
