@@ -27,11 +27,8 @@ public class AdminController {
 
         imie = "'" + imie + "'";
         nazwisko = "'" + nazwisko + "'";
-        Database.query("select create_pracownik( " + imie + ", " + nazwisko + ");");
-        Scanner scanner = Database.getResult();
-        scanner.nextLine();
-        scanner.nextLine();
-        pracownikLabel.setText("ID pracownika to: " + scanner.next());
+        String id = Database.getSingleResult("select create_pracownik( " + imie + ", " + nazwisko + ");");
+        pracownikLabel.setText("ID pracownika to: " + id);
     }
 
     public void dodajPaczkomat(){
@@ -40,11 +37,8 @@ public class AdminController {
 
         ulica = "'" + ulica + "'";
         miasto = "'" + miasto + "'";
-        Database.query("select create_paczkomat( " + miasto + ", " + ulica + ");");
-        Scanner scanner = Database.getResult();
-        scanner.nextLine();
-        scanner.nextLine();
-        paczkomatLabel.setText("ID paczkomatu to: " + scanner.next());
+        String pacz = Database.getSingleResult("select create_paczkomat( " + miasto + ", " + ulica + ");");
+        paczkomatLabel.setText("ID paczkomatu to: " + pacz);
     }
 
     public void zdezaktywujPaczkomat(){
@@ -52,9 +46,6 @@ public class AdminController {
 
         id = "'" + id + "'";
         Database.query("update paczkomaty set aktywny='F'::boolean where id_paczkomatu=" + id + ";");
-        Scanner scanner = Database.getResult();
-        scanner.nextLine();
-        scanner.nextLine();
     }
 
     public void dodajRabat(){
@@ -64,9 +55,6 @@ public class AdminController {
         klientId = "'" + klientId + "'";
         rabat = "'" + rabat + "'";
         Database.query("select dodaj_rabat( " + klientId + ", " + rabat + ");");
-        Scanner scanner = Database.getResult();
-        scanner.nextLine();
-        scanner.nextLine();
     }
 
     public void zmienCene(){
@@ -78,8 +66,5 @@ public class AdminController {
         typ = "'" + typ + "'";
         cena = "'" + cena + "'";
         Database.query("select zmien_cena( " + typ + ", " + klasa + ", " + cena + ");");
-        Scanner scanner = Database.getResult();
-        scanner.nextLine();
-        scanner.nextLine();
     }
 }
