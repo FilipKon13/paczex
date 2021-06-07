@@ -46,6 +46,10 @@ public class CustomerController implements Initializable {
 
     public List<Paczka> listaPaczek;
     public Label stanLabel;
+    public Label typLabel;
+    public TextField xTypField;
+    public TextField yTypField;
+    public TextField zTypField;
 
     private int current_ID;
 
@@ -229,7 +233,12 @@ public class CustomerController implements Initializable {
     }
 
     public void ustalTyp() {
-
+        int x = Integer.parseInt(xTypField.getText());
+        int y = Integer.parseInt(yTypField.getText());
+        int z = Integer.parseInt(zTypField.getText());
+        String typy = Database.getSingleResult("select znajdz_pasujace_paczki("+x+","+y+","+z+");");
+        if(typy.equals(" {}"))typy="brak";
+        typLabel.setText("Możliwe typy: "+typy);
     }
 
     @Override

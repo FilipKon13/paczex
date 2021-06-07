@@ -174,7 +174,6 @@ ALTER TABLE przewozy_paczki ADD CONSTRAINT fk_paczka FOREIGN KEY ( id_paczki ) R
 ALTER TABLE rabaty_stale_klienci ADD CONSTRAINT fk_rabaty_stale_klienci_klienci FOREIGN KEY ( id_klienta ) REFERENCES klienci( id_klienta );
 
 
---ok
 create or replace function insert_hash(paczka int) returns void as
 $$
 begin
@@ -182,18 +181,20 @@ begin
 end;
 $$ language plpgsql;
 
---ok
-create or replace function znajdz_pasujace_paczki( x integer, y integer, z integer ) returns table(typ integer, klasa integer, cena numeric(6,2)) AS $$
-	SELECT id_typu, id_klasy, cena FROM typy NATURAL JOIN cena_klasa_typ WHERE
+
+create or replace function znajdz_pasujace_paczki( x integer, y integer, z integer ) returns int[] AS $$
+begin
+	return array(SELECT id_typu FROM typy WHERE
 		( x <= wymiar_x AND y <= wymiar_y AND z <= wymiar_z )
 	       	OR  ( y <= wymiar_x AND x <= wymiar_y AND z <= wymiar_z )
 	       	OR  ( x <= wymiar_x AND z <= wymiar_y AND y <= wymiar_z )
 	       	OR  ( y <= wymiar_x AND z <= wymiar_y AND x <= wymiar_z )
 	       	OR  ( z <= wymiar_x AND x <= wymiar_y AND y <= wymiar_z )
-	       	OR  ( z <= wymiar_x AND y <= wymiar_y AND x <= wymiar_z );
-$$ LANGUAGE SQL;
+	       	OR  ( z <= wymiar_x AND y <= wymiar_y AND x <= wymiar_z ) );
+end;
+$$ LANGUAGE plpgsql;
 
---ok
+
 create or replace function paczkomat_dodaj_check(paczkomat int, paczka int) returns boolean as
 $$
 declare l_miejsc int;
@@ -208,7 +209,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function wez_za_stare(pracownik int, paczkomat int) returns void as
 $$
 declare r record;
@@ -225,14 +226,14 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function pracownik_active(id int) returns boolean as $$
 begin
 	return (select count(*) from przewozy where id_pracownika = id and data_zakonczenia is null) = 1;
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function id_przewozu(id_prac int) returns int as $$
 begin
 	if pracownik_active(id_prac) = false then return -1; end if;
@@ -240,7 +241,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function wez_paczki_pracownik(id_prac int, id_od int, id_do int) returns void as $$
 declare
 	nr_przewozu int := id_przewozu(id_prac);
@@ -260,7 +261,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function get_stan_paczki(id_p int) returns int as $$
 begin
 	return (select id_stanu from historia_paczek
@@ -268,7 +269,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function get_opis_stanu_paczki(id_p int) returns varchar as $$
 declare stan int := get_stan_paczki(id_p);
 begin
@@ -276,7 +277,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function wloz_paczki_pracownik(id_prac int, id_pacz int) returns void as $$
 declare
 	nr_przewozu int := id_przewozu(id_prac);
@@ -300,7 +301,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function zakoncz_przewoz(id_prac int) returns void as $$
 declare
 	nr_przewozu int := id_przewozu(id_prac);
@@ -311,14 +312,14 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function zmien_cena(id_t int, id_k int, new_cena numeric(6,2)) returns void as $$
 begin
 	update cena_klasa_typ set cena = new_cena where id_typu = id_t and id_klasy = id_k;
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function zloz_zamowienie(id_kl int, id_t int, id_p_n int, id_p_o int, id_n int, id_o int, op varchar) returns int as $$
 declare id_pacz int := nextval('paczki_seq');
 begin
@@ -328,7 +329,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function cena_paczki(paczka int) returns numeric(6,2) as
 $$
 declare klient int;
@@ -343,7 +344,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function create_przewoz(pracownik int) returns boolean as
 $$
 begin
@@ -353,7 +354,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function odbierz_paczke_klient(klient int, paczka int, hasz_odb varchar(20) ) returns boolean as
 $$
 begin
@@ -367,7 +368,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function wloz_paczke_klient(klient int, paczka int) returns boolean as
 $$
 declare paczkomat int;
@@ -382,7 +383,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function create_klient(nazwa varchar(20), numer varchar(15), email varchar(30)) returns int as $$
 declare id int := nextval('klienci_seq');
 begin
@@ -391,7 +392,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function dodaj_rabat(klient int, rabat_nowy numeric(5,2)) returns void as
 $$
 begin
@@ -403,7 +404,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function create_pracownik(imie varchar(20), nazwisko varchar(20)) returns int as $$
 declare id int := nextval('pracownicy_seq');
 begin
@@ -412,7 +413,7 @@ begin
 end;
 $$ language plpgsql;
 
---ok
+
 create or replace function create_paczkomat(miasto varchar(20), ulica_nr varchar(20)) returns int as $$
 declare id int := nextval('paczkomaty_seq');
 begin
