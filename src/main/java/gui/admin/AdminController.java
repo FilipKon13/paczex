@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import utility.Database;
+import utility.ErrorAlert;
 import utility.Pracownik;
 
 import java.net.URL;
@@ -75,6 +76,8 @@ public class AdminController implements Initializable {
         String imie = pracownikImie.getText();
         String nazwisko = pracownikNazwisko.getText();
 
+        if(!ErrorAlert.checkString( imie ))return;
+        if(!ErrorAlert.checkString( nazwisko ))return;
         imie = "'" + imie + "'";
         nazwisko = "'" + nazwisko + "'";
         String id = Database.getSingleResult("select create_pracownik( " + imie + ", " + nazwisko + ");");
@@ -104,6 +107,8 @@ public class AdminController implements Initializable {
         String miasto = paczAddMiasto.getText();
         String ulica = paczAddUlica.getText();
 
+        if(!ErrorAlert.checkString( ulica ))return;
+        if(!ErrorAlert.checkString( miasto ))return;
         ulica = "'" + ulica + "'";
         miasto = "'" + miasto + "'";
         String pacz = Database.getSingleResult("select create_paczkomat( " + miasto + ", " + ulica + ");");
@@ -113,6 +118,7 @@ public class AdminController implements Initializable {
     public void zdezaktywujPaczkomat(){
         String id = paczDeleteId.getText();
 
+        if(!ErrorAlert.checkString( id ))return;
         id = "'" + id + "'";
         Database.query("update paczkomaty set aktywny='F'::boolean where id_paczkomatu=" + id + ";");
     }
@@ -121,6 +127,8 @@ public class AdminController implements Initializable {
         String klientId = rabatKlientId.getText();
         String rabat = rabatWartosc.getText();
 
+        if(!ErrorAlert.checkString( klientId ))return;
+        if(!ErrorAlert.checkString( rabat ))return;
         klientId = "'" + klientId + "'";
         rabat = "'" + rabat + "'";
         Database.query("select dodaj_rabat( " + klientId + ", " + rabat + ");");
@@ -131,6 +139,9 @@ public class AdminController implements Initializable {
         String typ = zmienTyp.getText();
         String cena = zmienCenaWartosc.getText();
 
+        if(!ErrorAlert.checkString( klasa ))return;
+        if(!ErrorAlert.checkString( typ ))return;
+        if(!ErrorAlert.checkString( cena ))return;
         klasa = "'" + klasa + "'";
         typ = "'" + typ + "'";
         cena = "'" + cena + "'";

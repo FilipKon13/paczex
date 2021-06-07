@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import utility.Database;
+import utility.ErrorAlert;
 import utility.Paczka;
 
 import java.net.URL;
@@ -107,6 +108,8 @@ public class EmployeeController implements Initializable {
         String idZ = paczZWyjmij.getText();
         String idDo = paczDoWyjmij.getText();
 
+        if(!ErrorAlert.checkString( idZ ))return;
+        if(!ErrorAlert.checkString( idDo ))return;
         idZ = "'" + idZ + "'";
         idDo = "'" + idDo + "'";
         Database.query("select wez_paczki_pracownik( " + current_ID + ", " + idZ + ", " + idDo +");");
@@ -116,6 +119,7 @@ public class EmployeeController implements Initializable {
     public void wlozPaczki(){
         String idDo = paczDoWloz.getText();
 
+        if(!ErrorAlert.checkString( idDo ))return;
         idDo = "'" + idDo + "'";
         Database.query("select wloz_paczki_pracownik( " + current_ID + ", " + idDo +");");
         refreshTableView();

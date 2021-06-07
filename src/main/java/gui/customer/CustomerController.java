@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import utility.Database;
+import utility.ErrorAlert;
 import utility.Paczka;
 
 import java.net.URL;
@@ -166,6 +167,9 @@ public class CustomerController implements Initializable {
             newLabelMessage.setText("Numer lub email musi zostać podany");
             return;
         }
+        if(!ErrorAlert.checkString( nazwa ))return;
+        if(!ErrorAlert.checkString( numer ))return;
+        if(!ErrorAlert.checkString( email ))return;
         nazwa = "'" + nazwa + "'";
         if(numer.isEmpty()) numer = "null";
         else numer = "'" + numer + "'";
@@ -179,6 +183,10 @@ public class CustomerController implements Initializable {
         String id_klienta = Integer.toString(current_ID);
         String id_paczki = odbierzIdField.getText();
         String kod = odbierzKodField.getText();
+
+        if(!ErrorAlert.checkString( id_paczki ))return;
+        if(!ErrorAlert.checkString( kod ))return;
+        id_paczki = "'" + id_paczki + "'";
         kod = "'" + kod + "'";
         Scanner scanner = Database.query(
                 "select odbierz_paczke_klient( " + id_klienta + ", " + id_paczki + ", " +kod + ");");
@@ -193,6 +201,7 @@ public class CustomerController implements Initializable {
         int klasa = Integer.parseInt(nadajKlasa.getText());
         int typ = Integer.parseInt(nadajTyp.getText());
         String opis = nadajOpis.getText();
+        if(!ErrorAlert.checkString( opis ))return;
         String new_id = Database.getSingleResult(
                 "select zloz_zamowienie(" + klasa + ", " + typ + ", " + paczkomat_nadania
                 + ", " + paczkomat_odbioru + ", " + nadawca + ", " + odbiorca + ", '" + opis + "');");
