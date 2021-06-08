@@ -126,7 +126,12 @@ public class CustomerController implements Initializable {
     }
 
     public void loadID() {
-        current_ID = Integer.parseInt(idField.getText());
+        try {
+            current_ID = Integer.parseInt(idField.getText());
+        } catch(NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         Scanner scanner = Database.query(
                 "select nazwa, numer_telefonu, email from klienci where id_klienta = " + current_ID);
         scanner.nextLine();
@@ -185,13 +190,16 @@ public class CustomerController implements Initializable {
     }
 
     public void odbierzPaczke() {
-        String id_klienta = Integer.toString(current_ID);
-        String id_paczki = odbierzIdField.getText();
+        int id_klienta = current_ID;
+        int id_paczki;
+        try{
+            id_paczki = Integer.parseInt(odbierzIdField.getText());
+        }catch (NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         String kod = odbierzKodField.getText();
-
-        if(!ErrorAlert.checkString( id_paczki ))return;
-        if(!ErrorAlert.checkString( kod ))return;
-        id_paczki = "'" + id_paczki + "'";
+        if(!ErrorAlert.checkString( kod ))  return;
         kod = "'" + kod + "'";
         Scanner scanner = Database.query(
                 "select odbierz_paczke_klient( " + id_klienta + ", " + id_paczki + ", " +kod + ");");
@@ -201,11 +209,17 @@ public class CustomerController implements Initializable {
 
     public void nadajPaczke() {
         int nadawca = current_ID;
-        int odbiorca = Integer.parseInt(nadajOdbiorca.getText());
-        int paczkomat_nadania = Integer.parseInt(nadajPaczNadania.getText());
-        int paczkomat_odbioru = Integer.parseInt(nadajPaczOdbioru.getText());
-        int klasa = Integer.parseInt(nadajKlasa.getText());
-        int typ = Integer.parseInt(nadajTyp.getText());
+        int odbiorca, paczkomat_nadania, paczkomat_odbioru, klasa, typ;
+        try {
+            odbiorca = Integer.parseInt(nadajOdbiorca.getText());
+            paczkomat_nadania = Integer.parseInt(nadajPaczNadania.getText());
+            paczkomat_odbioru = Integer.parseInt(nadajPaczOdbioru.getText());
+            klasa = Integer.parseInt(nadajKlasa.getText());
+            typ = Integer.parseInt(nadajTyp.getText());
+        } catch(NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         String opis = nadajOpis.getText();
         if(!ErrorAlert.checkString( opis ))return;
         String new_id = Database.getSingleResult(
@@ -218,7 +232,13 @@ public class CustomerController implements Initializable {
     }
 
     public void sprawdzStan(){
-        int id = Integer.parseInt(odbierzIdField.getText());
+        int id;
+        try{
+            id = Integer.parseInt(odbierzIdField.getText());
+        } catch(NumberFormatException w){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         String stan = Database.getSingleResult("select get_opis_stanu_paczki(" + id + ")").strip();
         if(stan.equals("gotowa do odbioru")){
             stanLabel.setText("Paczka " + id + "jest gotowa do odbioru\n Kod: "
@@ -228,17 +248,29 @@ public class CustomerController implements Initializable {
     }
 
     public void obliczCene() {
-        int typ = Integer.parseInt(nadajTyp.getText());
-        int klasa = Integer.parseInt(nadajKlasa.getText());
+        int typ,klasa;
+        try {
+            typ = Integer.parseInt(nadajTyp.getText());
+            klasa = Integer.parseInt(nadajKlasa.getText());
+        }catch(NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         String cena = Database.getSingleResult(
                 "select cena from cena_klasa_typ where id_typu = " + typ + " and id_klasy = " + klasa + ";");
         cenaLabel.setText(cena);
     }
 
     public void ustalTyp() {
-        int x = Integer.parseInt(xTypField.getText());
-        int y = Integer.parseInt(yTypField.getText());
-        int z = Integer.parseInt(zTypField.getText());
+        int x,y,z;
+        try {
+            x = Integer.parseInt(xTypField.getText());
+            y = Integer.parseInt(yTypField.getText());
+            z = Integer.parseInt(zTypField.getText());
+        }catch (NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         String typy = Database.getSingleResult("select znajdz_pasujace_paczki("+x+","+y+","+z+");");
         if(typy.equals(" {}"))typy="brak";
         typLabel.setText("Możliwe typy: "+typy);

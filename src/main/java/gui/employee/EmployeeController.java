@@ -110,22 +110,26 @@ public class EmployeeController implements Initializable {
     }
 
     public void wyjmijPaczki(){
-        String idZ = paczZWyjmij.getText();
-        String idDo = paczDoWyjmij.getText();
-
-        if(!ErrorAlert.checkString( idZ ))return;
-        if(!ErrorAlert.checkString( idDo ))return;
-        idZ = "'" + idZ + "'";
-        idDo = "'" + idDo + "'";
+        int idZ,idDo;
+        try {
+             idZ = Integer.parseInt(paczZWyjmij.getText());
+             idDo = Integer.parseInt(paczDoWyjmij.getText());
+        } catch(NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         Database.query("select wez_paczki_pracownik( " + current_ID + ", " + idZ + ", " + idDo +");");
         refreshTableView();
     }
 
     public void wlozPaczki(){
-        String idDo = paczDoWloz.getText();
-
-        if(!ErrorAlert.checkString( idDo ))return;
-        idDo = "'" + idDo + "'";
+        int idDo;
+        try{
+            idDo = Integer.parseInt(paczDoWloz.getText());
+        } catch (NumberFormatException e){
+            ErrorAlert.showErrorAlert("Pole musi zawierać liczbę");
+            return;
+        }
         Database.query("select wloz_paczki_pracownik( " + current_ID + ", " + idDo +");");
         refreshTableView();
     }
