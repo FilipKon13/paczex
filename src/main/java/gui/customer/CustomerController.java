@@ -146,6 +146,7 @@ public class CustomerController implements Initializable {
         nazwaLabel.setText(nazwa.toString());
         numerLabel.setText(numer);
         emailLabel.setText(email);
+        refreshTableView();
     }
 
     public void refreshTableView() {
@@ -195,6 +196,7 @@ public class CustomerController implements Initializable {
         Scanner scanner = Database.query(
                 "select odbierz_paczke_klient( " + id_klienta + ", " + id_paczki + ", " +kod + ");");
         Database.printResult(scanner);
+        refreshTableView();
     }
 
     public void nadajPaczke() {
@@ -212,6 +214,7 @@ public class CustomerController implements Initializable {
         odbiorLabelMessage.setText("Nadano paczke: " + new_id);
         String res = Database.getSingleResult("select wloz_paczke_klient(" + nadawca + ", " + new_id + ");");
         System.out.println(res);
+        refreshTableView();
     }
 
     public void sprawdzStan(){

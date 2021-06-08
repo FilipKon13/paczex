@@ -83,13 +83,18 @@ public class EmployeeController implements Initializable {
 
     public void refreshTableView(){
         listaPaczek = new ArrayList<>();
-        int nr_przewozu = Integer.parseInt(Database.getSingleResult("select id_przewozu(" + current_ID +")").strip());
-        int N = Integer.parseInt(Database.getSingleResult("select count(*) from przewozy_paczki where id_przewozu = " + nr_przewozu).strip());
-        Scanner scanner = Database.query("select id_paczki from przewozy_paczki where id_przewozu = " + nr_przewozu);
+        int nr_przewozu = Integer.parseInt(Database.getSingleResult("select id_przewozu(" + current_ID +")"));
+        int N = Integer.parseInt(Database.getSingleResult("select count(*) from przewozy_paczki where id_przewozu = " + nr_przewozu));
+        Scanner scanner = Database.query("select * from get_moje_paczki_pracownik(" + nr_przewozu +")");
         scanner.nextLine();
         scanner.nextLine();
         for(int i=0;i<N;i++){
-            listaPaczek.add(new Paczka(scanner.nextInt()));
+            int id = Integer.parseInt(scanner.next().strip());
+            scanner.next();
+            String from = scanner.next().strip();
+            scanner.next();
+            String to = scanner.next().strip();
+            listaPaczek.add(new Paczka(id,from,to));
         }
         tableView.setItems(null);
         tableView.setItems(FXCollections.observableList(listaPaczek));

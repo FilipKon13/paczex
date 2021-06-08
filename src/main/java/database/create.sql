@@ -438,8 +438,8 @@ select id_paczki,
 (select id_paczki, id_nadawcy, id_odbiorcy, id_paczkomatu_nadania, id_paczkomatu_odbioru, id_klasy, opis from paczki where id_nadawcy = id or id_odbiorcy = id) as sub
 $$ language sql;
 
-create or replace function get_moje_paczki_pracownik(id int) returns table(i int, o int, d int) as $$
-select id_paczki, id_paczkomatu_nadania, id_paczkomatu_odbioru from paczki where id_paczki in (select id_paczki from przewozy_paczki where id_przewozu = id_przewozu(id));
+create or replace function get_moje_paczki_pracownik(id_prze int) returns table(i int, o int, d int) as $$
+select id_paczki, id_paczkomatu_nadania, id_paczkomatu_odbioru from paczki where id_paczki in (select id_paczki from przewozy_paczki where id_przewozu = id_prze);
 $$ language sql;
 
 insert into klasy values
