@@ -838,7 +838,7 @@ insert into pojemnosc_paczkomatu values
 (50, 1, 91),
 (50, 2, 50),
 (50, 3, 2),
-(50, 4, 94),
+(50, 4, 94);
 
 insert into rabaty_stale_klienci values
 (1,10);
