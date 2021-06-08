@@ -23,12 +23,12 @@ create sequence paczkomaty_seq start 1 increment by 1;
 CREATE  TABLE paczkomaty (
 	id_paczkomatu        integer DEFAULT nextval('paczkomaty_seq') NOT NULL ,
 	miasto               varchar(20)  NOT NULL ,
-	ulica_nr             varchar(20)  NOT NULL ,
+	ulica_nr             varchar(100)  NOT NULL ,
 	aktywny				 boolean DEFAULT true NOT NULL,
 	CONSTRAINT pk_paczkomaty_id_paczkomatu PRIMARY KEY ( id_paczkomatu )
  );
 
-CREATE INDEX idx_paczkomaty_miasto ON paczkomaty USING hash( miasto );
+CREATE INDEX idx_paczkomaty_miasto ON paczkomaty USING hash( miasto ) WHERE aktywny;
 
 create sequence pracownicy_seq start 1 increment by 1;
 
@@ -45,13 +45,13 @@ CREATE  TABLE przewozy (
 	id_przewozu          integer DEFAULT nextval('przewozy_seq') NOT NULL ,
 	id_pracownika        integer  NOT NULL ,
 	data_rozpoczecia     timestamp DEFAULT current_timestamp NOT NULL ,
-	data_zakonczenia     timestamp   ,
+	data_zakonczenia     timestamp ,
 	CONSTRAINT pk_przewozy_id_przewozu PRIMARY KEY ( id_przewozu )
  );
 
 ALTER TABLE przewozy ADD CONSTRAINT cns_przewozy CHECK ( data_rozpoczecia <= data_zakonczenia or data_zakonczenia is null );
 
-CREATE INDEX indeks_pracownika ON przewozy USING hash( id_pracownika );
+CREATE INDEX przewozy_w_toku ON przewozy USING hash( id_pracownika ) WHERE data_zakonczenia is null;
 
 CREATE  TABLE rabaty_stale_klienci (
 	id_klienta           integer  NOT NULL ,
