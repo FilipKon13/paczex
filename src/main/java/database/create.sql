@@ -429,13 +429,19 @@ insert into klasy values
 
 insert into typy values
 (1,10,20,20),
-(2,20,30,30);
+(2,20,30,30),
+(3,50,50,70),
+(4,30,80,80);
 
 insert into cena_klasa_typ values
 (1,1,8),
 (2,1,10),
 (1,2,12),
-(2,2,15);
+(2,2,15),
+(1,3,15),
+(2,3,20),
+(1,4,21),
+(2,4,27);
 
 insert into pracownicy values
 (default,'Jan','Kowalski'),
