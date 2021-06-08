@@ -2,11 +2,9 @@ package gui.customer;
 
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import utility.Database;
 import utility.ErrorAlert;
 import utility.Paczka;
@@ -45,11 +43,12 @@ public class CustomerController implements Initializable {
     public TableColumn<Paczka, String> stanColumn;
 
     public List<Paczka> listaPaczek;
-    public Label stanLabel;
     public Label typLabel;
     public TextField xTypField;
     public TextField yTypField;
     public TextField zTypField;
+    public TextArea stanLabel;
+    public TextField miastoField;
 
     private int current_ID;
 
@@ -283,5 +282,17 @@ public class CustomerController implements Initializable {
         emailLabel.setText("");
         //noinspection unchecked
         tableView.getColumns().addAll(idColumn, nadawcaColumn, odbiorcaColumn, klasaColumn, opisColumn, stanColumn);
+    }
+
+    public void dajMiasta() {
+        String name = miastoField.getText();
+        if(!ErrorAlert.checkString(name)) return;
+        System.out.println(name);
+        name = "'" + name + "'";
+        Scanner scanner = Database.query("select id_paczkomatu, ulica_nr from aktywne_paczkomaty where miasto = " + name);
+        scanner.nextLine();
+        scanner.nextLine();
+        stanLabel.setText("");
+        while(scanner.hasNext())    stanLabel.appendText(scanner.nextLine().strip() + "\n");
     }
 }

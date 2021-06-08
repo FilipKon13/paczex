@@ -603,9 +603,9 @@ insert into stany values
 (6, 'w punkcie zbiorczym');
 
 insert into paczkomaty values
-(default,'Krakow', 'Lojasiewicza 6'),
-(default,'Krakow', 'Lubicz 43'),
-(default,'Tarnow','Krakowska 149'),
+(default,'Kraków', 'Lojasiewicza 6'),
+(default,'Kraków', 'Lubicz 43'),
+(default,'Tarnów','Krakowska 149'),
 (default,'Kraków','ul. Kopernika Mikołaja 59'),
 (default,'Warszawa','ul. Zesłańców Polskich 63'),
 (default,'Jastrzębie-Zdrój','ul. Truskawkowa 100'),
