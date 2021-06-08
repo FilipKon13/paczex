@@ -217,14 +217,12 @@ $$
 declare r record;
 declare nr_przewozu int := id_przewozu(pracownik);
 begin
-	create table tmp as (select pp.id_paczki as id from paczkomaty_paczki pp where id_paczkomatu=paczkomat and
-	current_timestamp>interval '2 days' + (select max(data_zmiany) from historia_paczek hp where hp.id_paczki=pp.id_paczki) );
-	for r in (select * from tmp) loop
+	for r in (select pp.id_paczki as id from paczkomaty_paczki pp where id_paczkomatu=paczkomat and
+    current_timestamp>interval '2 days' + (select max(data_zmiany) from historia_paczek hp where hp.id_paczki=pp.id_paczki) ) loop
 		delete from paczkomaty_paczki where id_paczki=r.id;
 		insert into historia_paczek values(r.id, 6, default);
 		insert into przewozy_paczki values(nr_przewozu, r.id);
 	end loop;
-	drop table tmp;
 end;
 $$ language plpgsql;
 
@@ -250,9 +248,7 @@ declare
 	paczka record;
 begin
 	if nr_przewozu=-1 then return; end if;
-	drop table if exists tmp cascade;
-	create table tmp as (select id_paczki from paczkomaty_paczki where id_paczkomatu = id_od);
-	for paczka in (select id_paczki as id from tmp) loop
+	for paczka in (select id_paczki as id from (select id_paczki from paczkomaty_paczki where id_paczkomatu = id_od) as sub) loop
 		if (select id_paczkomatu_odbioru from paczki where id_paczki=paczka.id) = id_do then
 			insert into historia_paczek values (paczka.id, 3, default);
 			insert into przewozy_paczki values (nr_przewozu, paczka.id);
@@ -287,21 +283,17 @@ declare
 	paczka record;
 begin
 	if nr_przewozu = -1 then return; end if;
-	drop table if exists paczki_do_oddania cascade;
-	create table paczki_do_oddania as
-	(select prz.id_paczki as id_paczki, pacz.id_klasy as klasa from (select id_paczki from przewozy_paczki
-	where id_przewozu = nr_przewozu and get_stan_paczki(id_paczki) = 3) as prz
-	join (select id_paczki, id_klasy from paczki where id_paczkomatu_odbioru = id_pacz) as pacz on prz.id_paczki = pacz.id_paczki);
-
-	for paczka in (select id_paczki as id from paczki_do_oddania order by 2 - klasa) loop
+	for paczka in (select id_paczki as id from
+	 (select prz.id_paczki as id_paczki, pacz.id_klasy as klasa from (select id_paczki from przewozy_paczki
+     	where id_przewozu = nr_przewozu and get_stan_paczki(id_paczki) = 3) as prz
+     	join (select id_paczki, id_klasy from paczki where id_paczkomatu_odbioru = id_pacz) as pacz on prz.id_paczki = pacz.id_paczki) as sub
+	 order by 2 - klasa) loop
 		if paczkomat_dodaj_check(id_pacz, paczka.id) then
 			insert into historia_paczek values (paczka.id, 4, default);
 			insert into paczkomaty_paczki values (id_pacz, paczka.id);
-			delete from przewozy_paczki where id_przewozu = nr_przewozu and id_paczki = paczka.id;
 			perform insert_hash(paczka.id);
 		end if;
 	end loop;
-	drop table paczki_do_oddania;
 end;
 $$ language plpgsql;
 
@@ -311,7 +303,7 @@ declare
 	nr_przewozu int := id_przewozu(id_prac);
 begin
 	insert into historia_paczek
-	(select id_paczki, 6, current_timestamp from przewozy_paczki where id_przewozu = nr_przewozu and get_stan_paczki(id_paczki) != 6);
+	(select id_paczki, 6, current_timestamp from przewozy_paczki where id_przewozu = nr_przewozu and get_stan_paczki(id_paczki) = 3);
 	update przewozy set data_zakonczenia = current_timestamp where id_przewozu = nr_przewozu;
 end;
 $$ language plpgsql;
@@ -433,7 +425,8 @@ select id_paczki,
 $$ language sql;
 
 create or replace function get_moje_paczki_pracownik(id_prze int) returns table(i int, o int, d int) as $$
-select id_paczki, id_paczkomatu_nadania, id_paczkomatu_odbioru from paczki where id_paczki in (select id_paczki from przewozy_paczki where id_przewozu = id_prze);
+select id_paczki, id_paczkomatu_nadania, id_paczkomatu_odbioru from paczki where id_paczki in
+(select id_paczki from przewozy_paczki pp where pp.id_przewozu = id_prze and get_stan_paczki(pp.id_paczki) = 3);
 $$ language sql;
 
 insert into klasy values

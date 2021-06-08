@@ -2,7 +2,6 @@ package gui.customer;
 
 import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import utility.Database;
