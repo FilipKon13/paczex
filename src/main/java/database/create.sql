@@ -423,21 +423,172 @@ end;
 $$ language plpgsql;
 
 
-insert into klasy values (1,'zwykla'), (2,'premium');
+insert into klasy values
+(1,'zwykla'),
+(2,'premium');
 
-insert into typy values (1,10,20,20), (2,20,30,30);
+insert into typy values
+(1,10,20,20),
+(2,20,30,30);
 
-insert into cena_klasa_typ values (1,1,8), (2,1,10), (1,2,12), (2,2,15);
+insert into cena_klasa_typ values
+(1,1,8),
+(2,1,10),
+(1,2,12),
+(2,2,15);
 
-insert into pracownicy values (default,'Jan','Kowalski'), (default,'Adam','Nowak'), (default, 'Tomasz', 'Krakowski');
+insert into pracownicy values
+(default,'Jan','Kowalski'),
+(default,'Adam','Nowak'),
+(default, 'Tomasz', 'Krakowski'),
+(default, 'Javier', 'Lewis'),
+(default, 'Candace', 'Grant'),
+(default, 'Leroy', 'Austin'),
+(default, 'Lana', 'Norris'),
+(default, 'Shawn', 'Gill'),
+(default, 'Lydia', 'Becker'),
+(default, 'Earl', 'Barrett'),
+(default, 'Neal', 'Rios'),
+(default, 'Cody', 'Fields'),
+(default, 'Willie', 'Stevens'),
+(default, 'Ryan', 'Curtis'),
+(default, 'Jo', 'Burke'),
+(default, 'Tabitha', 'Kelly'),
+(default, 'Damon', 'Welch'),
+(default, 'Arnold', 'Hale'),
+(default, 'Toni', 'Lane'),
+(default, 'Heidi', 'Greer'),
+(default, 'Sheri', 'Pena'),
+(default, 'Leona', 'Simpson'),
+(default, 'Gertrude', 'Brown'),
+(default, 'Erika', 'Richardson'),
+(default, 'Elaine', 'Logan'),
+(default, 'Nichole', 'Murray'),
+(default, 'Pat', 'Hardy'),
+(default, 'Nora', 'Hodges');
 
-insert into klienci values (default,'Amazon','600500400','amazon@amazon.pl'), (default,'Jan Wojcik', '615789432', 'janwojcik@gmail.com'), (default, 'Joanna Nowicka', '557980043', null),
-(default, 'Zabawki dla dzieci', '543786100', 'zabawki@gmail.com'), (default, 'Anna Jarosz', null, 'jaroszanna@wp.pl');
+insert into klienci values
+(default,'Amazon','600500400','amazon@amazon.pl'),
+(default,'Jan Wojcik', '615789432', 'janwojcik@gmail.com'),
+(default, 'Joanna Nowicka', '557980043', null),
+(default, 'Zabawki dla dzieci', '543786100', 'zabawki@gmail.com'),
+(default, 'Anna Jarosz', null, 'jaroszanna@wp.pl'),
+(default, 'Andres Gardner', '871492243', 'andres@gardner.com'),
+(default, 'Brooke Day', '361851920', null ),
+(default, 'Jimmy Lyons', '664616603', 'jimmy@lyons.com'),
+(default, 'Archie Wood', '876871731', null ),
+(default, 'Julie Reynolds', '594397226', 'julie@reynolds.com'),
+(default, 'Janie Boone', '147588477', 'janie@boone.com'),
+(default, 'Alexandra Doyle', '089247790', 'alexandra@doyle.com'),
+(default, 'Willie Bowers', '059186140', 'willie@bowers.com'),
+(default, 'Amber Bush', '785731510', 'amber@bush.com'),
+(default, 'Meghan Lopez', '333857615', null ),
+(default, 'Nicholas Herrera', '133989492', null ),
+(default, 'Olga Fitzgerald', '893338831', 'olga@fitzgerald.com'),
+(default, 'Belinda Alexander', '619224776', 'belinda@alexander.com'),
+(default, 'Rosalie Hines', '590949796', null ),
+(default, 'Danielle Santos', '203555093', 'danielle@santos.com'),
+(default, 'Dwight Rivera', '467020422', null ),
+(default, 'Hugo Taylor', '193713029', null ),
+(default, 'Patti Buchanan', '148575611', 'patti@buchanan.com'),
+(default, 'Debra Nash', '070109192', null ),
+(default, 'Madeline Massey', '090776620', null ),
+(default, 'Calvin Greer', '816252334', null ),
+(default, 'Ellen Wilkins', '542529097', null ),
+(default, 'Wanda Vaughn', '393713989', null ),
+(default, 'Dexter Duncan', '573509139', 'dexter@duncan.com'),
+(default, 'Clyde Parker', '935911467', null ),
+(default, 'Lynette Estrada', '461477415', null ),
+(default, 'Jan May', '485758537', 'jan@may.com'),
+(default, 'Lucia Colon', '395736350', null ),
+(default, 'Roderick Warner', '397672279', 'roderick@warner.com'),
+(default, 'Raymond Frazier', '323638744', null ),
+(default, 'Alma Vega', '569720535', 'alma@vega.com'),
+(default, 'Guillermo Hanson', '892941164', 'guillermo@hanson.com'),
+(default, 'Seth Walker', '802875080', null ),
+(default, 'Paulette Nichols', '138625168', null ),
+(default, 'Lorena Bowman', '858812571', null ),
+(default, 'Jean Wong', '164350135', 'jean@wong.com'),
+(default, 'Greg Medina', '317652229', null ),
+(default, 'Hazel Soto', '487963256', 'hazel@soto.com'),
+(default, 'Jane Barton', '748656458', null ),
+(default, 'Sidney Watson', '909017486', null ),
+(default, 'Cary Farmer', '898838769', null ),
+(default, 'Roger Zimmerman', '711517266', 'roger@zimmerman.com'),
+(default, 'Jodi Leonard', '660756952', 'jodi@leonard.com'),
+(default, 'Alfonso Jefferson', '311468330', 'alfonso@jefferson.com'),
+(default, 'Christine Benson', '625072557', 'christine@benson.com'),
+(default, 'Ernesto Nguyen', '046190462', 'ernesto@nguyen.com'),
+(default, 'Gilberto Griffith', '423759893', null ),
+(default, 'Roxanne Clark', '731189512', null ),
+(default, 'Lillian Moreno', '420177642', 'lillian@moreno.com'),
+(default, 'Milton Osborne', '190060223', null ),
+(default, 'Daryl Rodriquez', '179877967', 'daryl@rodriquez.com'),
+(default, 'Pam Andrews', '537028505', null ),
+(default, 'Ron Delgado', '760574189', 'ron@delgado.com'),
+(default, 'Gregg Patrick', '290078848', 'gregg@patrick.com'),
+(default, 'Caroline Gordon', '780814150', null ),
+(default, 'Franklin Howard', '959084367', null ),
+(default, 'Melba Boyd', '183262330', 'melba@boyd.com'),
+(default, 'Dan Barker', '022813934', 'dan@barker.com'),
+(default, 'Craig Byrd', '622950191', 'craig@byrd.com'),
+(default, 'Edith Ramos', '032941906', 'edith@ramos.com'),
+(default, 'Otis Abbott', '226451689', null ),
+(default, 'Stephanie Underwood', '294953015', null ),
+(default, 'Darrin Brock', '262321345', 'darrin@brock.com'),
+(default, 'Constance Gray', '189775587', 'constance@gray.com'),
+(default, 'Terri Mccoy', '354545067', null ),
+(default, 'Kathy Gonzalez', '674137643', null ),
+(default, 'Tina Davidson', '641567546', 'tina@davidson.com'),
+(default, 'Heidi Mcdonald', '336616248', 'heidi@mcdonald.com'),
+(default, 'Tony Carpenter', '784211640', null ),
+(default, 'Shane Becker', '633288230', null ),
+(default, 'Todd Harrison', '267946558', null ),
+(default, 'Nadine Pope', '618451815', 'nadine@pope.com'),
+(default, 'Sheldon Lawrence', '870243932', null ),
+(default, 'Lee Mckenzie', '546960105', 'lee@mckenzie.com'),
+(default, 'Arthur Franklin', '748510575', null ),
+(default, 'Jeff Fields', '447243889', null ),
+(default, 'Darrel Huff', '827327540', null ),
+(default, 'Colleen Vargas', '968577058', null ),
+(default, 'Desiree Rios', '448852727', 'desiree@rios.com'),
+(default, 'Oliver Black', '404508666', 'oliver@black.com'),
+(default, 'Joanna Murphy', '518098591', null ),
+(default, 'Clayton Horton', '880698441', null ),
+(default, 'Bill Knight', '192053745', 'bill@knight.com'),
+(default, 'Steve Reed', '574652561', null ),
+(default, 'Jared Foster', '815941542', 'jared@foster.com'),
+(default, 'Kirk Ray', '737085547', null ),
+(default, 'Herman Chavez', '072939325', 'herman@chavez.com'),
+(default, 'Delbert Maldonado', '678664828', null ),
+(default, 'Felipe Briggs', '266984371', 'felipe@briggs.com'),
+(default, 'Julia Edwards', '825311606', 'julia@edwards.com'),
+(default, 'Eunice Hodges', '828223573', null ),
+(default, 'Max Swanson', '653019516', 'max@swanson.com'),
+(default, 'Lionel Fowler', '350275500', 'lionel@fowler.com'),
+(default, 'Shirley Parks', '601475892', null ),
+(default, 'Casey Cole', '279551439', null );
 
-insert into stany values (1, 'oczekuje nadania'), (2, 'nadana'), (3, 'w doreczeniu'), (4, 'gotowa do odbioru'), (5, 'odebrana'), (6, 'w punkcie zbiorczym');
+insert into stany values
+(1, 'oczekuje nadania'),
+(2, 'nadana'),
+(3, 'w doreczeniu'),
+(4, 'gotowa do odbioru'),
+(5, 'odebrana'),
+(6, 'w punkcie zbiorczym');
 
-insert into paczkomaty values (default,'Krakow', 'Lojasiewicza 6'), (default,'Krakow', 'Lubicz 43'), (default,'Tarnow','Krakowska 149');
+insert into paczkomaty values
+(default,'Krakow', 'Lojasiewicza 6'),
+(default,'Krakow', 'Lubicz 43'),
+(default,'Tarnow','Krakowska 149');
 
-insert into pojemnosc_paczkomatu values (1,1,20), (1,2,15), (2,1,30), (2,2,20), (3,1,30), (3,2,20);
+insert into pojemnosc_paczkomatu values
+(1,1,20),
+(1,2,15),
+(2,1,30),
+(2,2,20),
+(3,1,30),
+(3,2,20);
 
-insert into rabaty_stale_klienci values(1,10);
+insert into rabaty_stale_klienci values
+(1,10);
