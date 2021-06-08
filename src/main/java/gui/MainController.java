@@ -10,7 +10,8 @@ import utility.Database;
 
 public class MainController {
     public Label commandLabel;
-    public TextField commandField;
+    public TextField usernameField;
+    public TextField databaseField;
 
     public void openAdmin() {
         AdminWindow.show();
@@ -25,8 +26,9 @@ public class MainController {
     }
 
     public void loadCommand() {
-        System.out.println(commandField.getText());
-        Database.load(commandField.getText());
+        System.out.println(usernameField.getText());
+        System.out.println(databaseField.getText());
+        Database.load(databaseField.getText() , usernameField.getText() );
     }
 
     public void openPlayground() {

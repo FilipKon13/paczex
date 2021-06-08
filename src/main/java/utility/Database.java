@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public final class Database {
-    private static String mainCommand = "wsl psql --dbname=\"filip\" --username=\"filip\""; //to change
+    private static String databaseName;
+    private static String usernameName;
 
     public static Scanner query(String command){
-        System.out.println(mainCommand + " --command=\"" + command + "\"");
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec(mainCommand + " --command=\"" + command + "\"");
+            process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-c", command });
             Scanner error = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(error.hasNext())  System.out.println(error.nextLine());
         } catch (IOException e) {
@@ -21,18 +21,21 @@ public final class Database {
         return new Scanner(new InputStreamReader(process.getInputStream()));
     }
 
-    public static void load(String command){
-        if(!command.isEmpty())  mainCommand = command;
+    public static void load(String db, String usr){
+        databaseName=db;
+        usernameName=usr;
+
         try { //clearing
             //wsl psql --dbname="rafi" --username="rafi"
             //added paczex/ to path you might want to change that
-            System.out.println(mainCommand + " < paczex/src/main/java/database/clear.sql");
-            Process process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/clear.sql");
+            System.out.println( " < paczex/src/main/java/database/clear.sql");
+        //    Process process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/clear.sql");
+            Process process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/clear.sql" });
             Scanner cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
             //creating
-            System.out.println(mainCommand + " < paczex/src/main/java/database/create.sql");
-            process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/create.sql");
+            System.out.println( " < paczex/src/main/java/database/create.sql");
+            process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/create.sql" });
             cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
         } catch (IOException e) {
@@ -48,6 +51,9 @@ public final class Database {
         Scanner scanner = query(command);
         scanner.nextLine();
         scanner.nextLine();
-        return scanner.nextLine();
+        String res=scanner.nextLine();
+        while(res.indexOf(" ")==0)res=res.substring(1);
+        System.out.println(res);
+        return res;
     }
 }

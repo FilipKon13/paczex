@@ -113,6 +113,7 @@ public class AdminController implements Initializable {
         miasto = "'" + miasto + "'";
         String pacz = Database.getSingleResult("select create_paczkomat( " + miasto + ", " + ulica + ");");
         paczkomatLabel.setText("ID paczkomatu to: " + pacz);
+        System.out.println("ID paczkomatu to: " + pacz);
     }
 
     public void zdezaktywujPaczkomat(){

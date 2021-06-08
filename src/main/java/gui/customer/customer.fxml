@@ -14,16 +14,16 @@
       <Label layoutX="14.0" layoutY="135.0" text="Email" />
       <Label fx:id="nazwaLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="72.0" prefWidth="100.0" text="Label" />
       <Label fx:id="numerLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="101.0" prefWidth="100.0" text="Label" />
-      <Label fx:id="emailLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="135.0" prefWidth="100.0" text="Label" />
+      <Label fx:id="emailLabel" alignment="CENTER_RIGHT" layoutX="64.0" layoutY="135.0" prefHeight="16.0" prefWidth="159.0" text="Label" />
       <TableView fx:id="tableView" layoutX="244.0" layoutY="10.0" prefHeight="186.0" prefWidth="342.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
       <Button layoutX="177.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshTableView" text="Refresh" />
-      <Button layoutX="114.0" layoutY="275.0" mnemonicParsing="false" onAction="#createKlient" text="Nowy klient" />
+      <Button layoutX="79.0" layoutY="275.0" mnemonicParsing="false" onAction="#createKlient" text="Nowy klient" />
       <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="198.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
-      <Button layoutX="276.0" layoutY="397.0" mnemonicParsing="false" onAction="#odbierzPaczke" text="Odbierz paczkę" />
+      <Button layoutX="229.0" layoutY="402.0" mnemonicParsing="false" onAction="#odbierzPaczke" text="Odbierz paczkę" />
       <Button layoutX="498.0" layoutY="397.0" mnemonicParsing="false" onAction="#nadajPaczke" text="Nadaj paczkę" />
       <TextField fx:id="newKlientNazwaField" layoutX="59.0" layoutY="166.0" prefHeight="26.0" prefWidth="134.0" />
       <TextField fx:id="newKlientNumerField" layoutX="59.0" layoutY="200.0" prefHeight="26.0" prefWidth="134.0" />
@@ -35,7 +35,7 @@
       <Label layoutX="205.0" layoutY="256.0" text="Kod" />
       <TextField fx:id="odbierzIdField" layoutX="263.0" layoutY="212.0" prefHeight="26.0" prefWidth="112.0" />
       <TextField fx:id="odbierzKodField" layoutX="263.0" layoutY="252.0" prefHeight="26.0" prefWidth="112.0" />
-      <Button layoutX="397.0" layoutY="397.0" mnemonicParsing="false" onAction="#obliczCene" prefHeight="26.0" prefWidth="87.0" text="Oblicz cenę" />
+      <Button layoutX="388.0" layoutY="397.0" mnemonicParsing="false" onAction="#obliczCene" prefHeight="26.0" prefWidth="106.0" text="Oblicz cenę" />
       <TextField fx:id="nadajPaczNadania" layoutX="397.0" layoutY="213.0" prefHeight="26.0" prefWidth="87.0" promptText="ID nadania" />
       <TextField fx:id="nadajPaczOdbioru" layoutX="498.0" layoutY="213.0" prefHeight="26.0" prefWidth="87.0" promptText="ID odbioru" />
       <TextField fx:id="nadajKlasa" layoutX="397.0" layoutY="251.0" prefHeight="26.0" prefWidth="87.0" promptText="Klasa" />
@@ -47,15 +47,15 @@
       <Line endX="-0.5999755859375" endY="-89.19999694824219" layoutX="385.0" layoutY="298.0" startX="-0.5999755859375" startY="139.99996948242188" />
       <Button layoutX="100.0" layoutY="346.0" mnemonicParsing="false" onAction="#ustalTyp" prefHeight="26.0" prefWidth="87.0" text="Ustal typ" />
       <Label layoutX="397.0" layoutY="364.0" text="Cena" />
-      <Label fx:id="cenaLabel" alignment="CENTER_RIGHT" layoutX="428.0" layoutY="364.0" prefHeight="18.0" prefWidth="79.0" />
-      <Button layoutX="276.0" layoutY="359.0" mnemonicParsing="false" onAction="#sprawdzStan" prefHeight="26.0" prefWidth="98.0" text="Sprawdź stan" />
-      <Label fx:id="stanLabel" layoutX="203.0" layoutY="308.0" prefHeight="38.0" prefWidth="171.0" wrapText="true" />
-      <Label layoutX="14.0" layoutY="315.0" prefHeight="18.0" prefWidth="12.0" text="X:" />
-      <TextField fx:id="xTypField" layoutX="27.0" layoutY="310.0" prefHeight="26.0" prefWidth="64.0" />
-      <Label layoutX="100.0" layoutY="315.0" prefHeight="18.0" prefWidth="12.0" text="Y:" />
+      <Label fx:id="cenaLabel" alignment="CENTER_RIGHT" layoutX="428.0" layoutY="364.0" prefHeight="18.0" prefWidth="106.0" />
+      <Button layoutX="229.0" layoutY="376.0" mnemonicParsing="false" onAction="#sprawdzStan" prefHeight="26.0" prefWidth="119.0" text="Sprawdź stan" />
+      <Label fx:id="stanLabel" layoutX="203.0" layoutY="308.0" prefHeight="64.0" prefWidth="171.0" wrapText="true" />
+      <Label layoutX="14.0" layoutY="315.0" prefHeight="18.0" prefWidth="25.0" text="X:" />
+      <TextField layoutX="27.0" layoutY="310.0" prefHeight="26.0" prefWidth="64.0" fx:id="xTypField" />
+      <Label layoutX="100.0" layoutY="315.0" prefHeight="18.0" prefWidth="34.0" text="Y:" />
       <TextField fx:id="yTypField" layoutX="112.0" layoutY="310.0" prefHeight="26.0" prefWidth="64.0" />
-      <Label layoutX="14.0" layoutY="350.0" prefHeight="18.0" prefWidth="12.0" text="Z:" />
+      <Label layoutX="14.0" layoutY="350.0" prefHeight="18.0" prefWidth="34.0" text="Z:" />
       <TextField fx:id="zTypField" layoutX="27.0" layoutY="346.0" prefHeight="26.0" prefWidth="64.0" />
-      <Label fx:id="typLabel" layoutX="18.0" layoutY="389.0" prefHeight="18.0" prefWidth="171.0" />
+      <Label fx:id="typLabel" layoutX="18.0" layoutY="389.0" prefHeight="44.0" prefWidth="171.0" />
    </children>
 </AnchorPane>

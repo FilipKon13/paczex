@@ -18,7 +18,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
         AnchorPane root = loader.load();
         MainController controller = loader.getController();
-        controller.commandLabel.setText("On Linux something like \n[psql --dbname=\"name\" --username=\"user\"]");
+        controller.commandLabel.setText("Enter username and database name");
         primaryStage.setTitle("Paczex");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
