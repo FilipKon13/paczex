@@ -256,7 +256,7 @@ public class CustomerController implements Initializable {
             return;
         }
         String cena = Database.getSingleResult(
-                "select cena from cena_klasa_typ where id_typu = " + typ + " and id_klasy = " + klasa + ";");
+                "select cena_paczki(" + current_ID +", " + typ + ", " + klasa + ")");
         cenaLabel.setText(cena);
     }
 
@@ -272,7 +272,7 @@ public class CustomerController implements Initializable {
         }
         String typy = Database.getSingleResult("select znajdz_pasujace_paczki("+x+","+y+","+z+");");
         if(typy.equals(" {}"))typy="brak";
-        typLabel.setText("Możliwe typy: "+typy);
+        stanLabel.setText("Możliwe typy:\n"+typy);
     }
 
     @Override

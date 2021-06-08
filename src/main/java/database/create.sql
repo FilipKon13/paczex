@@ -334,15 +334,9 @@ end;
 $$ language plpgsql;
 
 
-create or replace function cena_paczki(paczka int) returns numeric(6,2) as
+create or replace function cena_paczki(klient int, typ int, klasa int) returns numeric(6,2) as
 $$
-declare klient int;
-declare typ int;
-declare klasa int;
 begin
-	klient=(select id_nadawcy from paczki where id_paczki = paczka);
-	typ=(select id_typu from paczki where id_paczki=paczka);
-	klasa=(select id_klasy from paczki where id_paczki=paczka);
 	return round( (select cena from cena_klasa_typ where id_klasy=klasa and id_typu=typ)*
 	(1-0.01*coalesce( (select min(rabat) from rabaty_stale_klienci where id_klienta=klient), 0) ), 2);
 end;
