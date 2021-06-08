@@ -11,7 +11,7 @@ public final class Database {
     public static Scanner query(String command){
         Process process = null;
         try {
-            process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-c", command });
+            process = Runtime.getRuntime().exec(new String[] { "wsl", "psql", "--dbname",  databaseName,  "--username", usernameName,"-c", command });
             Scanner error = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(error.hasNext())  System.out.println(error.nextLine());
         } catch (IOException e) {
@@ -30,12 +30,12 @@ public final class Database {
             //added paczex/ to path you might want to change that
             System.out.println( " < paczex/src/main/java/database/clear.sql");
         //    Process process = Runtime.getRuntime().exec(mainCommand + " < src/main/java/database/clear.sql");
-            Process process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/clear.sql" });
+            Process process = Runtime.getRuntime().exec(new String[] { "wsl","psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/clear.sql" });
             Scanner cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
             //creating
             System.out.println( " < paczex/src/main/java/database/create.sql");
-            process = Runtime.getRuntime().exec(new String[] { "psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/create.sql" });
+            process = Runtime.getRuntime().exec(new String[] { "wsl","psql", "--dbname",  databaseName,  "--username", usernameName,"-f","src/main/java/database/create.sql" });
             cin = new Scanner(new InputStreamReader(process.getErrorStream()));
             while(cin.hasNext())    System.out.println(cin.nextLine());
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public final class Database {
         scanner.nextLine();
         scanner.nextLine();
         String res=scanner.nextLine();
-        while(res.indexOf(" ")==0)res=res.substring(1);
+        res = res.strip();
         System.out.println(res);
         return res;
     }
