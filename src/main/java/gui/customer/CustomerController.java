@@ -239,8 +239,9 @@ public class CustomerController implements Initializable {
         }
         String stan = Database.getSingleResult("select get_opis_stanu_paczki(" + id + ")").strip();
         if(stan.equals("gotowa do odbioru")){
-            stanLabel.setText("Paczka " + id + "jest gotowa do odbioru\n Kod: "
-                    + Database.getSingleResult("select hasz from hasze where id_paczki = " + id));
+            stanLabel.setText("Paczka " + id + " jest gotowa do odbioru");
+            if(current_ID == Integer.parseInt(Database.getSingleResult("select id_odbiorcy from paczki where id_paczki = " + id)))
+                stanLabel.appendText("\nKod: \n" + Database.getSingleResult("select hasz from hasze where id_paczki = " + id));
         }
         else    stanLabel.setText("Stan paczki " + id + ": " + stan);
     }

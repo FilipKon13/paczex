@@ -84,7 +84,7 @@ public class EmployeeController implements Initializable {
     public void refreshTableView(){
         listaPaczek = new ArrayList<>();
         int nr_przewozu = Integer.parseInt(Database.getSingleResult("select id_przewozu(" + current_ID +")"));
-        int N = Integer.parseInt(Database.getSingleResult("select count(*) from przewozy_paczki where id_przewozu = " + nr_przewozu));
+        int N = Integer.parseInt(Database.getSingleResult("select count(*) from przewozy_paczki where get_stan_paczki(id_paczki) = 3 and id_przewozu = " + nr_przewozu));
         Scanner scanner = Database.query("select * from get_moje_paczki_pracownik(" + nr_przewozu +")");
         scanner.nextLine();
         scanner.nextLine();
