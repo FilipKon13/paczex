@@ -30,6 +30,8 @@ CREATE  TABLE paczkomaty (
 
 CREATE INDEX idx_paczkomaty_miasto ON paczkomaty USING hash( miasto ) WHERE aktywny;
 
+create view aktywne_paczkomaty as select id_paczkomatu, miasto, ulica_nr from paczkomaty where aktywny;
+
 create sequence pracownicy_seq start 1 increment by 1;
 
 CREATE  TABLE pracownicy (
@@ -248,6 +250,7 @@ declare
 	paczka record;
 begin
 	if nr_przewozu=-1 then return; end if;
+	drop table if exists tmp cascade;
 	create table tmp as (select id_paczki from paczkomaty_paczki where id_paczkomatu = id_od);
 	for paczka in (select id_paczki as id from tmp) loop
 		if (select id_paczkomatu_odbioru from paczki where id_paczki=paczka.id) = id_do then
@@ -284,6 +287,7 @@ declare
 	paczka record;
 begin
 	if nr_przewozu = -1 then return; end if;
+	drop table if exists paczki_do_oddania cascade;
 	create table paczki_do_oddania as
 	(select prz.id_paczki as id_paczki, pacz.id_klasy as klasa from (select id_paczki from przewozy_paczki
 	where id_przewozu = nr_przewozu and get_stan_paczki(id_paczki) = 3) as prz
@@ -422,6 +426,21 @@ begin
 end;
 $$ language plpgsql;
 
+create or replace function get_moje_paczki_klient(id int) returns table(i int, n varchar, o varchar, i_n int, i_o int, kl varchar, op varchar, st varchar) as $$
+select id_paczki,
+    (select nazwa from klienci where id_klienta = id_nadawcy),
+    (select nazwa from klienci where id_klienta = id_odbiorcy),
+    id_paczkomatu_nadania,
+    id_paczkomatu_odbioru,
+    (select nazwa from klasy k where k.id_klasy = sub.id_klasy),
+    opis,
+    get_opis_stanu_paczki(id_paczki) from
+(select id_paczki, id_nadawcy, id_odbiorcy, id_paczkomatu_nadania, id_paczkomatu_odbioru, id_klasy, opis from paczki where id_nadawcy = id or id_odbiorcy = id) as sub
+$$ language sql;
+
+create or replace function get_moje_paczki_pracownik(id int) returns table(i int, o int, d int) as $$
+select id_paczki, id_paczkomatu_nadania, id_paczkomatu_odbioru from paczki where id_paczki in (select id_paczki from przewozy_paczki where id_przewozu = id_przewozu(id));
+$$ language sql;
 
 insert into klasy values
 (1,'zwykla'),

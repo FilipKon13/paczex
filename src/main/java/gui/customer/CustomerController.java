@@ -150,14 +150,14 @@ public class CustomerController implements Initializable {
 
     public void refreshTableView() {
         listaPaczek = new ArrayList<>();
-        Scanner scanner = Database.query("select id_paczki from paczki where id_nadawcy = " + current_ID
-                + " or id_odbiorcy = " + current_ID);
+        int N = Integer.parseInt(Database.getSingleResult
+                ("select count(*) from paczki where id_nadawcy = " + current_ID + " or id_odbiorcy = " + current_ID).strip());
+        Scanner scanner = Database.query("select * from get_moje_paczki_klient(" + current_ID +")");
         scanner.nextLine();
         scanner.nextLine();
-        while(scanner.hasNext()){
-            try {
-                listaPaczek.add(new Paczka(Integer.parseInt(scanner.next())));
-            } catch(NumberFormatException ignored){}
+//        while(scanner.hasNext())    System.out.println(scanner.nextLine());
+        for(int i=0;i<N;i++){
+            listaPaczek.add(new Paczka(scanner));
         }
         tableView.setItems(null); //forcing refresh
         tableView.setItems(FXCollections.observableList(listaPaczek));
